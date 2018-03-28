@@ -1,13 +1,14 @@
 import * as THREE from 'three';
 
 class Camera {
-    constructor(scene){
-        this.camera = new THREE.PerspectiveCamera( 60, width / height, 1, 2000 );
-        camera.position.x = -10;
-        camera.position.y = 15;
-        camera.position.z = 500;
-        camera.lookAt( scene.position );
-        scene.add(camera);
+    constructor(width, height){
+        
+        this.camera = new THREE.PerspectiveCamera( 75, width/height, 0.1, 1000 );
+        // this.camera.position.x = -10;
+        // this.camera.position.y = 15;
+        this.camera.position.z = 10;
+        this.camera.lookAt( scene.position );
+        scene.add(this.camera);
     
         console.log('initing camera....');
     }
