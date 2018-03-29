@@ -10,6 +10,11 @@ import '../styles/index.scss';
 import Camera from '../components/camera';
 import Light from '../components/light';
 import Utils from '../components/utils';
+import Particles from '../components/particles';
+import Orbitcontrols from 'three-orbitcontrols';
+
+
+
 
 window.onload = function(){
 
@@ -35,48 +40,46 @@ window.onload = function(){
     renderer.setPixelRatio( window.devicePixelRatio );
     renderer.setSize( width, height );
     container.appendChild( renderer.domElement );
+		// container.appendChild( stats.dom );  //增加状态信息 
+
 
     //init camera
     var utils = new Utils(scene,width,height);
-    
     var camera =utils.camera;
     scene.add(camera);
     console.log(camera);
+    camera.position.set( 0, 20, 100 );
     
+    //init coordinate system
+    var coordinateSystem = utils.initCoordinateSystem();
+    scene.add(coordinateSystem);
+
     // init light
     var light = utils.light;
     scene.add(light);
     console.log(light);
     
-    //init controls
 
     var geometry = new THREE.BoxGeometry( 1, 1, 1 );
     var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
     var cube = new THREE.Mesh( geometry, material );
     scene.add( cube );
 
-      // var scene = new THREE.Scene();
-			// var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
+    // init particle system
+    var particles = new Particles(10000);
+    scene.add(particles.particleSystem);
+		particles.particleSystem.sortParticles = true;
 
-			// var renderer = new THREE.WebGLRenderer();
-			// renderer.setSize( window.innerWidth, window.innerHeight );
-			// document.body.appendChild( renderer.domElement );
-
-			// var geometry = new THREE.BoxGeometry( 1, 1, 1 );
-			// var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
-			// var cube = new THREE.Mesh( geometry, material );
-			// scene.add( cube );
-
-			// camera.position.z = 10;
-
+     
       
 
 			var animate = function () {
-				requestAnimationFrame( animate );
+        requestAnimationFrame( animate );
+        particles.updateParticles();
+
 
 				// cube.rotation.x += 0.1;
 				// cube.rotation.y += 0.1;
-
 				renderer.render(scene, camera);
 			};
 

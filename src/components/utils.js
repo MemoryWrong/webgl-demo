@@ -1,4 +1,6 @@
 import * as THREE from 'three';
+import Orbitcontrols from 'three-orbitcontrols';
+
 
 // initialize the light and provide all kinds of methods
 class Utils{
@@ -9,20 +11,24 @@ class Utils{
         this.camera = new THREE.PerspectiveCamera( 60, width / height, 1, 2000 );
         this.camera.position.z = 10;
         this.camera.lookAt( scene.position );
+        //控制地球
+        let orbitControls = new /*THREE.OrbitControls*/Orbitcontrols(this.camera);
+        orbitControls.autoRotate = false;
         console.log('initing camera....');
 
         // init light 
         this.light = new THREE.DirectionalLight(0xe0e0e0);
         this.light.position.set(1, 1, 0).normalize();
     }
-    initCamera(){
+    updateCamera(){
+        console.log("update the camera....");
         
     }
-    initLight(){
-        console.log("initial the light....");
+    updateLight(){
+        console.log("update the light....");
 
     }
-    static initCoordinateSystem(){
+    initCoordinateSystem(){
         console.log('initing the coordinate system...');
         // var material = new THREE.LineBasicMaterial( { color: 0x0000ff } );
         var material = new THREE.LineBasicMaterial( {

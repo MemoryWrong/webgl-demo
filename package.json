@@ -51,6 +51,7 @@
     "sass-loader": "^6.0.7",
     "style-loader": "^0.18.2",
     "three": "^0.91.0",
+    "three-orbit-controls": "^82.1.0",
     "three-orbitcontrols": "^2.0.0",
     "uglifyjs-webpack-plugin": "^1.2.3",
     "webpack": "^4.1.1",
