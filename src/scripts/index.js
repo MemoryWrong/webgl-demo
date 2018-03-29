@@ -73,17 +73,17 @@ window.onload = function(){
      
       
 
-			var animate = function () {
-        requestAnimationFrame( animate );
-        particles.updateParticles();
+    var animate = function () {
+      requestAnimationFrame( animate );
+      particles.updateParticles();
 
 
-				// cube.rotation.x += 0.1;
-				// cube.rotation.y += 0.1;
-				renderer.render(scene, camera);
-			};
+      // cube.rotation.x += 0.1;
+      // cube.rotation.y += 0.1;
+      renderer.render(scene, camera);
+    };
 
-			animate();
+    animate();
 
 
 };
