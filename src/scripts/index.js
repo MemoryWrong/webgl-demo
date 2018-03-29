@@ -48,34 +48,48 @@ window.onload = function(){
     var camera =utils.camera;
     scene.add(camera);
     console.log(camera);
-    camera.position.set( 0, 20, 100 );
-    
-    //init coordinate system
-    var coordinateSystem = utils.initCoordinateSystem();
-    scene.add(coordinateSystem);
 
     // init light
     var light = utils.light;
     scene.add(light);
     console.log(light);
     
+    scene.add(utils.showCamera());
+    scene.add(utils.showLight());
+    
+    //init coordinate system
+    var coordinateSystem = utils.initCoordinateSystem();
+    scene.add(coordinateSystem);
 
-    var geometry = new THREE.BoxGeometry( 1, 1, 1 );
-    var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+    var geometry = new THREE.BoxGeometry( 50, 50, 50 );
+    geometry.computeVertexNormals();
+    // var material = new THREE.MeshBasicMaterial( { color: 0xffffff } );
+    // Make a material
+  var material = new THREE.MeshPhongMaterial({
+    ambient: 0x555555,
+    color: 0xffffff,
+    specular: 0xffffff,
+    shininess: 50,
+    shading: THREE.SmoothShading
+  });
+  //   var material = new THREE.MeshLambertMaterial({
+  //     color:0xffffff,
+  //     // wireframe:true
+  // });
     var cube = new THREE.Mesh( geometry, material );
     scene.add( cube );
 
     // init particle system
-    var particles = new Particles(10000);
-    scene.add(particles.particleSystem);
-		particles.particleSystem.sortParticles = true;
+    // var particles = new Particles(100);
+    // scene.add(particles.particleSystem);
+		// particles.particleSystem.sortParticles = true;
 
      
       
 
     var animate = function () {
       requestAnimationFrame( animate );
-      particles.updateParticles();
+      // particles.updateParticles();
 
 
       // cube.rotation.x += 0.1;

@@ -7,18 +7,26 @@ class Utils{
     
     constructor(scene, width,height){
         // init camera 
-        this.light = new THREE.AmbientLight(0x686868);
+        // this.light = new THREE.AmbientLight(0x686868);
         this.camera = new THREE.PerspectiveCamera( 60, width / height, 1, 2000 );
         this.camera.position.z = 10;
         this.camera.lookAt( scene.position );
-        //控制地球
+        this.camera.position.set(150,150,150);
+        //control
         let orbitControls = new /*THREE.OrbitControls*/Orbitcontrols(this.camera);
         orbitControls.autoRotate = false;
         console.log('initing camera....');
 
-        // init light 
-        this.light = new THREE.DirectionalLight(0xe0e0e0);
-        this.light.position.set(1, 1, 0).normalize();
+        this.light = new THREE.PointLight(0xffffff, 1, 0);
+        this.light.position.set(-100, 100, 100);
+
+        this.light = new THREE.PointLight(0x0000ff, 1, 0);
+        this.light.position.set(-100, 100, -100);
+
+        // this.light = new THREE.PointLight(0xff0000, 1, 0);
+        // this.light.position.set(-100, -100, 100);
+
+
     }
     updateCamera(){
         console.log("update the camera....");
@@ -52,7 +60,20 @@ class Utils{
         var line = new THREE.Line( geometry, material );
         return line;
     }
-    
+    showLight(){
+        var geometry = new THREE.BoxGeometry( 2, 2, 2 );
+        var material = new THREE.MeshBasicMaterial( { color: 0xffffff } );
+        var cube = new THREE.Mesh( geometry, material );
+        cube.position.set(this.light.position.x,this.light.position.y,this.light.position.z);
+        return cube;
+    }
+    showCamera(){
+        var geometry = new THREE.BoxGeometry( 10, 10, 10 );
+        var material = new THREE.MeshBasicMaterial( { color: 0xffffff } );
+        var cube = new THREE.Mesh( geometry, material );
+        cube.position.set(this.camera.position.x,this.camera.position.y,this.camera.position.z);
+        return cube;
+    }
     
 }
 
