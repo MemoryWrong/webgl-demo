@@ -28,7 +28,7 @@ class Particles{
         // console.log(this.particles.colors);
         // this.pMaterial = new THREE.PointsMaterial( {vertexColors:true, size: 5, sizeAttenuation: false, color:0x000fff } );
         this.pMaterial = new THREE.PointsMaterial({vertexColors:this.particles.colors, 
-            size: 5, sizeAttenuation: true,  } );
+            size: 2, sizeAttenuation: true,  } );
 
         
         //make particleSystem object as a property of the particle Class

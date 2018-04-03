@@ -1,10 +1,9 @@
 import * as THREE from 'three';
-// import * as url from '../assets/terrain.png';
 import heightmap from '../assets/terrain.png';
 
 class Terrain{
     constructor(width, height) {
-        console.log("init the terrain....");
+        console.log("init the terrain....",width,height);
         this.width = width;
         this.height = height;
 
@@ -24,13 +23,17 @@ class Terrain{
 
     getHeightData(img, size) {
 
+        console.log('the image size is',img,size);
         var canvas = document.createElement( 'canvas' );
         canvas.width = size;
         canvas.height = size;
+        // canvas.width = this.width;
+        // canvas.height = this.height;
         var context = canvas.getContext( '2d' );
     
-        var area = size * size, data = new Float32Array( area );
+        var area = canvas.width * canvas.height, data = new Float32Array( area );
     
+
         context.drawImage(img,0,0);
     
         for ( var i = 0; i < area; i ++ ) {
@@ -39,33 +42,37 @@ class Terrain{
     
         var imgd = context.getImageData(0, 0, size, size);
         var pix = imgd.data;
-    
+
         var j=0;
         for (var i = 0, n = pix.length; i < n; i += (4)) {
           var all = pix[i]+pix[i+1]+pix[i+2];
-          data[j++] = all/30;
+          data[j++] = all/8;
         }
     
         return data;
     }
 
     loadImg(){
-        console.log(heightmap);
-
         var img = new Image();
-        console.log(img);
+        console.log(img,this.width);
         
         var self = this;
         img.onload = function() {
-          var heightData = self.getHeightData( img, 256 );
-          console.log(heightData);
-        //   // buildTerrainMesh( size, heightData, seaLevel_isOptional )
-        //   var terrainMesh = buildTerrainMesh( 256, heightData, 1.0 );
-        //   var terrain = loadTriangleMeshToVBO( terrainMesh );
-        //   scene.add( terrain );
+            // default image size width = height;
+            var heightData = self.getHeightData( img, self.width );
+            // console.log(self.geometry);
+            self.update(heightData);
         };
-        // var url = require('../assets/terrain.png');
         img.src = heightmap;
+    }
+
+    // not suggest init the heightmap and update heightmap and re-render
+    update(heightData){
+        for(var i=0; i<this.geometry.vertices.length;i++){
+            this.geometry.vertices[i].y = Math.random();
+            this.geometry.vertices[i].y = heightData[i+3];
+        }
+        this.geometry.verticesNeedUpdate = true;
     }
 
     build() {
@@ -74,15 +81,6 @@ class Terrain{
         this.material = new THREE.MeshLambertMaterial({
             wireframe:true
         });
-
-        // loading the height map and get the data of the height
-        // mapping the height data to x axis value;
-
-        for(var i=0; i<this.geometry.vertices.length;i++){
-            this.geometry.vertices[i].y = Math.random();
-        }
-        // console.log(this.geometry.vertices);
-        
         this.mesh = new THREE.Mesh(this.geometry, this.material);
         this.mesh.position.x = 0;
         this.mesh.position.z = 0;

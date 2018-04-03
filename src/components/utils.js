@@ -18,17 +18,21 @@ class Utils{
         // console.log('initing camera....');
 
         this.light = new THREE.PointLight(0xffffff, 1, 0);
-        this.light.position.set(-100, 100, -100);
+        this.light.position.set(100, 100, 0);
 
-
+        this.angle = 0;
     }
     updateCamera(){
         console.log("update the camera....");
         
     }
     updateLight(){
-        console.log("update the light....");
-
+        this.angle += 0.02;
+        
+        this.light.position.z = 100*Math.sin(this.angle);
+        this.light.position.x = 100*Math.cos(this.angle);
+        this.lightcube.position.z = this.light.position.z;
+        this.lightcube.position.x = this.light.position.x;
     }
     initCoordinateSystem(){
         console.log('initing the coordinate system...');
@@ -55,18 +59,18 @@ class Utils{
         return line;
     }
     showLight(){
-        var geometry = new THREE.BoxGeometry( 2, 2, 2 );
+        var geometry = new THREE.SphereGeometry( 5, 12, 12 );
         var material = new THREE.MeshBasicMaterial( { color: 0xffffff } );
-        var cube = new THREE.Mesh( geometry, material );
-        cube.position.set(this.light.position.x,this.light.position.y,this.light.position.z);
-        return cube;
+        this.lightcube = new THREE.Mesh( geometry, material );
+        this.lightcube.position.set(this.light.position.x,this.light.position.y,this.light.position.z);
+        return this.lightcube;
     }
     showCamera(){
         var geometry = new THREE.BoxGeometry( 10, 10, 10 );
         var material = new THREE.MeshBasicMaterial( { color: 0xffffff } );
-        var cube = new THREE.Mesh( geometry, material );
-        cube.position.set(this.camera.position.x,this.camera.position.y,this.camera.position.z);
-        return cube;
+        this.cameracube = new THREE.Mesh( geometry, material );
+        this.cameracube.position.set(this.camera.position.x,this.camera.position.y,this.camera.position.z);
+        return this.cameracube;
     }
     
 }

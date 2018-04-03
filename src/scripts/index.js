@@ -13,6 +13,7 @@ import Utils from '../components/utils';
 import Terrain from '../components/terrain';
 import Particles from '../components/particles';
 import Orbitcontrols from 'three-orbitcontrols';
+import { Particle } from 'three';
 
 
 
@@ -62,25 +63,13 @@ window.onload = function(){
     var coordinateSystem = utils.initCoordinateSystem();
     scene.add(coordinateSystem);
 
-    // var geometry = new THREE.BoxGeometry( 50, 50, 50 );
-    // geometry.computeVertexNormals();
-    // var material = new THREE.MeshPhongMaterial({
-    //   ambient: 0x555555,
-    //   color: 0xffffff,
-    //   specular: 0xffffff,
-    //   shininess: 50,
-    //   shading: THREE.SmoothShading
-    // });
-    // var cube = new THREE.Mesh( geometry, material );
-    // scene.add( cube );
-
     // init particle system
-    // var particles = new Particles(100);
-    // scene.add(particles.particleSystem);
-		// particles.particleSystem.sortParticles = true;
+    var particles = new Particles(1000);
+    scene.add(particles.particleSystem);
+		particles.particleSystem.sortParticles = true;
 
     // init terrain system
-    var terrain = new Terrain(20,20);
+    var terrain = new Terrain(256,256);
     scene.add(terrain.build());
       
 
@@ -88,6 +77,8 @@ window.onload = function(){
       requestAnimationFrame( animate );
       // particles.updateParticles();
 
+      // update the position of the light;
+      utils.updateLight();
 
       // cube.rotation.x += 0.1;
       // cube.rotation.y += 0.1;
