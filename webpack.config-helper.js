@@ -34,16 +34,31 @@ module.exports = (options) => {
       new CleanWebpackPlugin([dest])
     ],
     module: {
-      rules: [{
-        test: /\.js$/,
-        exclude: /(node_modules|bower_components)/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['es2015']
-          }
+      rules: [
+        {
+          test: /\.js$/,
+          exclude: /(node_modules|bower_components)/,
+          use: {
+            loader: 'babel-loader',
+            options: {
+              presets: ['es2015']
+              }
+            }
+        },
+        {
+          test: /\.(jpg|png|svg)$/,
+          use: [
+            'file-loader'
+          ]     
         }
-      }]
+      ]
+      // loaders:[
+      //   {
+      //     test: /\.(jpg|png|svg)$/,
+      //     loader: 'file',
+      //     include: './path/to/images'
+      //   }
+      // ]
     }
     };
 

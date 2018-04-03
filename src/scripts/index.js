@@ -10,6 +10,7 @@ import '../styles/index.scss';
 import Camera from '../components/camera';
 import Light from '../components/light';
 import Utils from '../components/utils';
+import Terrain from '../components/terrain';
 import Particles from '../components/particles';
 import Orbitcontrols from 'three-orbitcontrols';
 
@@ -47,12 +48,12 @@ window.onload = function(){
     var utils = new Utils(scene,width,height);
     var camera =utils.camera;
     scene.add(camera);
-    console.log(camera);
+    // console.log(camera);
 
     // init light
     var light = utils.light;
     scene.add(light);
-    console.log(light);
+    // console.log(light);
     
     scene.add(utils.showCamera());
     scene.add(utils.showLight());
@@ -61,30 +62,26 @@ window.onload = function(){
     var coordinateSystem = utils.initCoordinateSystem();
     scene.add(coordinateSystem);
 
-    var geometry = new THREE.BoxGeometry( 50, 50, 50 );
-    geometry.computeVertexNormals();
-    // var material = new THREE.MeshBasicMaterial( { color: 0xffffff } );
-    // Make a material
-  var material = new THREE.MeshPhongMaterial({
-    ambient: 0x555555,
-    color: 0xffffff,
-    specular: 0xffffff,
-    shininess: 50,
-    shading: THREE.SmoothShading
-  });
-  //   var material = new THREE.MeshLambertMaterial({
-  //     color:0xffffff,
-  //     // wireframe:true
-  // });
-    var cube = new THREE.Mesh( geometry, material );
-    scene.add( cube );
+    // var geometry = new THREE.BoxGeometry( 50, 50, 50 );
+    // geometry.computeVertexNormals();
+    // var material = new THREE.MeshPhongMaterial({
+    //   ambient: 0x555555,
+    //   color: 0xffffff,
+    //   specular: 0xffffff,
+    //   shininess: 50,
+    //   shading: THREE.SmoothShading
+    // });
+    // var cube = new THREE.Mesh( geometry, material );
+    // scene.add( cube );
 
     // init particle system
     // var particles = new Particles(100);
     // scene.add(particles.particleSystem);
 		// particles.particleSystem.sortParticles = true;
 
-     
+    // init terrain system
+    var terrain = new Terrain(20,20);
+    scene.add(terrain.build());
       
 
     var animate = function () {
