@@ -16,6 +16,8 @@ class Terrain{
         );
         let rotation = new THREE.Matrix4().makeRotationX(-Math.PI / 2);
         this.geometry.applyMatrix(rotation);
+       
+        // this.geometry.computeTangents();
 
         this.loadImg();
     }
@@ -46,7 +48,8 @@ class Terrain{
         var j=0;
         for (var i = 0, n = pix.length; i < n; i += (4)) {
           var all = pix[i]+pix[i+1]+pix[i+2];
-          data[j++] = all/12;
+          //   define the height of each peak....
+          data[j++] = all/20;
         }
     
         return data;
@@ -60,7 +63,6 @@ class Terrain{
         img.onload = function() {
             // default image size width = height;
             var heightData = self.getHeightData( img, self.width );
-            // console.log(self.geometry);
             self.update(heightData);
         };
         img.src = heightmap;
@@ -73,23 +75,26 @@ class Terrain{
             this.geometry.vertices[i].y = heightData[i+3];
         }
         this.geometry.verticesNeedUpdate = true;
+        // this.geometry.computeFaceNormals();
+        this.geometry.computeVertexNormals();
     }
 
     build() {
-        // this.geometry.computeBoundingSphere();
-        this.geometry.computeVertexNormals();
-        // this.material = new THREE.MeshLambertMaterial({
-        //     wireframe:true
-        // });
-        this.material = new THREE.MeshPhongMaterial({
-            // light
-            specular: '#ffffff',
-            // intermediate
-            color: '#aaaaaa',
-            // dark
+        this.geometry.computeBoundingSphere();
+        this.material = new THREE.MeshLambertMaterial({
+            // wireframe:true,
+            color: '#24a8e8',
             emissive: '#333333',
-            shininess: 100 
-          });
+        });
+        // this.material = new THREE.MeshPhongMaterial({
+        //     // light
+        //     specular: '#ffffff',
+        //     // intermediate
+        //     color: '#aaaaaa',
+        //     // dark
+        //     emissive: '#333333',
+        //     shininess: 100 
+        //   });
 
         this.mesh = new THREE.Mesh(this.geometry, this.material);
         this.mesh.position.x = 0;

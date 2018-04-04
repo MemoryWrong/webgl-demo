@@ -39,6 +39,8 @@ window.onload = function(){
     //creating the renderer to render things....
     var renderer = new THREE.WebGLRenderer();
     // renderer.setClearColor( 0xffffff );
+    renderer.shadowMap.enabled = true;
+
     renderer.setPixelRatio( window.devicePixelRatio );
     renderer.setSize( width, height );
     container.appendChild( renderer.domElement );
@@ -59,12 +61,8 @@ window.onload = function(){
     scene.add(utils.showCamera());
     scene.add(utils.showLight());
     
-    //init coordinate system
-    // var coordinateSystem = utils.initCoordinateSystem();
-    // scene.add(coordinateSystem);
-
     //axes
-    var axes = new THREE.AxisHelper(100);
+    var axes = new THREE.AxesHelper(100);
     scene.add(axes);
     //grid xz
     var gridXZ = new THREE.GridHelper(100, 99);
@@ -72,14 +70,14 @@ window.onload = function(){
 
 
     // init particle system
-    var particles = new Particles(1000);
-    scene.add(particles.particleSystem);
-		particles.particleSystem.sortParticles = true;
+    // var particles = new Particles(1000);
+    // scene.add(particles.particleSystem);
+		// particles.particleSystem.sortParticles = true;
 
     // init terrain system
     var terrain = new Terrain(256,256);
-    scene.add(terrain.build());
-      
+    // var box = terrain.build();
+    scene.add(terrain.build()); 
 
     var animate = function () {
       requestAnimationFrame( animate );

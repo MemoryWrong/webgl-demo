@@ -18,7 +18,7 @@ class Utils{
         // console.log('initing camera....');
 
         this.light = new THREE.PointLight(0xffffff, 1, 0);
-        this.light.position.set(100, 100, 0);
+        this.light.position.set(100, 50, 0);
 
         this.angle = 0;
     }
@@ -29,8 +29,8 @@ class Utils{
     updateLight(){
         this.angle += 0.02;
         
-        this.light.position.z = 100*Math.sin(this.angle);
-        this.light.position.x = 100*Math.cos(this.angle);
+        this.light.position.z = 200*Math.sin(this.angle);
+        this.light.position.x = 200*Math.cos(this.angle);
         this.lightcube.position.z = this.light.position.z;
         this.lightcube.position.x = this.light.position.x;
     }
