@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import heightmap from '../assets/terrain.png';
+import heightmap from '../assets/terrain_1.png';
 
 class Terrain{
     constructor(width, height) {
@@ -46,7 +46,7 @@ class Terrain{
         var j=0;
         for (var i = 0, n = pix.length; i < n; i += (4)) {
           var all = pix[i]+pix[i+1]+pix[i+2];
-          data[j++] = all/8;
+          data[j++] = all/12;
         }
     
         return data;
@@ -78,9 +78,19 @@ class Terrain{
     build() {
         // this.geometry.computeBoundingSphere();
         this.geometry.computeVertexNormals();
-        this.material = new THREE.MeshLambertMaterial({
-            wireframe:true
-        });
+        // this.material = new THREE.MeshLambertMaterial({
+        //     wireframe:true
+        // });
+        this.material = new THREE.MeshPhongMaterial({
+            // light
+            specular: '#ffffff',
+            // intermediate
+            color: '#aaaaaa',
+            // dark
+            emissive: '#333333',
+            shininess: 100 
+          });
+
         this.mesh = new THREE.Mesh(this.geometry, this.material);
         this.mesh.position.x = 0;
         this.mesh.position.z = 0;

@@ -60,8 +60,16 @@ window.onload = function(){
     scene.add(utils.showLight());
     
     //init coordinate system
-    var coordinateSystem = utils.initCoordinateSystem();
-    scene.add(coordinateSystem);
+    // var coordinateSystem = utils.initCoordinateSystem();
+    // scene.add(coordinateSystem);
+
+    //axes
+    var axes = new THREE.AxisHelper(100);
+    scene.add(axes);
+    //grid xz
+    var gridXZ = new THREE.GridHelper(100, 99);
+    scene.add(gridXZ);
+
 
     // init particle system
     var particles = new Particles(1000);
