@@ -11,14 +11,14 @@ class Utils{
         this.camera = new THREE.PerspectiveCamera( 60, width / height, 1, 2000 );
         this.camera.position.z = 10;
         this.camera.lookAt( scene.position );
-        this.camera.position.set(50,50,50);
+        this.camera.position.set(350,500,350);
         //control
         let orbitControls = new /*THREE.OrbitControls*/Orbitcontrols(this.camera);
         orbitControls.autoRotate = false;
         // console.log('initing camera....');
 
         this.light = new THREE.PointLight(0xffffff, 1, 0);
-        this.light.position.set(100, 50, 0);
+        this.light.position.set(0, 150, 0);
 
         this.angle = 0;
     }

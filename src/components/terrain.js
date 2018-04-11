@@ -1,5 +1,6 @@
 import * as THREE from 'three';
-import heightmap from '../assets/terrain_1.png';
+import heightmap from '../assets/france_terrain.png';
+import texturemap from '../assets/france_texture.png';
 
 class Terrain{
     constructor(width, height) {
@@ -49,7 +50,8 @@ class Terrain{
         for (var i = 0, n = pix.length; i < n; i += (4)) {
           var all = pix[i]+pix[i+1]+pix[i+2];
           //   define the height of each peak....
-          data[j++] = all/20;
+          data[j++] = all/30;
+        //   console.log(data[j++]);
         }
     
         return data;
@@ -85,6 +87,9 @@ class Terrain{
             // wireframe:true,
             color: '#24a8e8',
             emissive: '#333333',
+        });
+        this.material = new THREE.MeshPhongMaterial({
+            map: THREE.ImageUtils.loadTexture(texturemap)
         });
         // this.material = new THREE.MeshPhongMaterial({
         //     // light

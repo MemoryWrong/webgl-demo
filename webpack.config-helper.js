@@ -20,7 +20,12 @@ module.exports = (options) => {
     ],
     output: {
       path: dest,
+      publicPath:'http://localhost:1337/',
       filename: 'bundle.[hash].js'
+    },
+    resolve: {
+      // you can now require('file') instead of require('file.js')
+      extensions: ['.js', '.json']
     },
     plugins: [
       new Webpack.DefinePlugin({
@@ -46,10 +51,12 @@ module.exports = (options) => {
             }
         },
         {
-          test: /\.(jpg|png|svg)$/,
-          use: [
-            'file-loader'
-          ]     
+          test: /\.(jpg|png|svg|obj)$/,
+          loader:'url-loader',
+          options:{
+            limit:1000
+          },
+          include:Path.join(__dirname, 'src/assets')
         }
       ]
       // loaders:[

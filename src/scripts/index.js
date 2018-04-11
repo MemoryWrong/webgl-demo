@@ -11,9 +11,15 @@ import Camera from '../components/camera';
 import Light from '../components/light';
 import Utils from '../components/utils';
 import Terrain from '../components/terrain';
+import Loader from '../components/loader';
 import Particles from '../components/particles';
 import Orbitcontrols from 'three-orbitcontrols';
 import { Particle } from 'three';
+
+import OBJLoader from 'three-obj-loader';
+
+import humanobj from '../assets/human.obj';
+import heightmap from '../assets/france_terrain.png';
 
 
 
@@ -57,16 +63,19 @@ window.onload = function(){
     var light = utils.light;
     scene.add(light);
     // console.log(light);
-    
-    scene.add(utils.showCamera());
-    scene.add(utils.showLight());
+    // scene.add(utils.showCamera());
+    // scene.add(utils.showLight());
     
     //axes
-    var axes = new THREE.AxesHelper(100);
-    scene.add(axes);
+    // var axes = new THREE.AxesHelper(100);
+    // scene.add(axes);
     //grid xz
     var gridXZ = new THREE.GridHelper(100, 99);
     scene.add(gridXZ);
+
+
+    // load objects;
+    var loader = new Loader(scene);
 
 
     // init particle system
@@ -75,19 +84,19 @@ window.onload = function(){
 		// particles.particleSystem.sortParticles = true;
 
     // init terrain system
-    var terrain = new Terrain(256,256);
-    // var box = terrain.build();
-    scene.add(terrain.build()); 
+    var terrain = new Terrain(660,660);
+    var box = terrain.build();
+    scene.add(box); 
 
     var animate = function () {
       requestAnimationFrame( animate );
       // particles.updateParticles();
 
       // update the position of the light;
-      utils.updateLight();
+      // utils.updateLight();
+      // console.log(box);
+      box.rotation.y += 0.001;
 
-      // cube.rotation.x += 0.1;
-      // cube.rotation.y += 0.1;
       renderer.render(scene, camera);
     };
 
