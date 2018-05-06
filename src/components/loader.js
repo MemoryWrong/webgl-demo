@@ -8,40 +8,37 @@ import heightmap from '../assets/france_terrain.png';
 
 class Loader {
     constructor(scene){
-        console.log('OBJ',humanobj);
-        console.log('OBJ',json);
-        // var loader = THREE.OBJLoader(THREE.DefaultLoadingManager);
+        // console.log('OBJ',humanobj);
+        console.log('JSON',json);
 
-
-        var loader = new THREE.ObjectLoader();
-        var image = new Image();
-        // var material = materials[ 0 ];
-		// var object = new THREE.Mesh( geometry, material );
-		// scene.add( object );
-        var material = json.materials[0];
-        var object = new THREE.Mesh(json.geometries[0]);
+        // var object = new THREE.Mesh(json.geometries[0],json.materials[0]);
         // scene.add(object);
-        // loader.load(
-        //     // resource URL
-        //     json,
 
-        //     // onLoad callback
-        //     // Here the loaded data is assumed to be an object
-        //     function ( obj ) {
-        //         // Add the loaded object to the scene
-        //         scene.add( obj );
-        //     },
 
-        //     // onProgress callback
-        //     function ( xhr ) {
-        //         console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
-        //     },
+        // load a resource
+        // instantiate a loader
+        var loader = new THREE.JSONLoader();
+        
+        loader.load(
+            // resource URL
+            json,
+            // onLoad callback
+            function ( geometry, materials ) {
+                var material = materials[ 0 ];
+                var object = new THREE.Mesh( geometry, material );
+                scene.add( object );
+            },
 
-        //     // onError callback
-        //     function ( err ) {
-        //         console.error( 'An error happened' );
-        //     }
-        // );
+            // onProgress callback
+            function ( xhr ) {
+                console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
+            },
+
+            // onError callback
+            function( err ) {
+                console.log( 'An error happened' );
+            }
+        );
     }
     
     init(){

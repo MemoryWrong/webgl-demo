@@ -67,15 +67,15 @@ window.onload = function(){
     // scene.add(utils.showLight());
     
     //axes
-    // var axes = new THREE.AxesHelper(100);
-    // scene.add(axes);
+    var axes = new THREE.AxesHelper(100);
+    scene.add(axes);
     //grid xz
     var gridXZ = new THREE.GridHelper(100, 99);
     scene.add(gridXZ);
 
 
     // load objects;
-    var loader = new Loader(scene);
+    // var loader = new Loader(scene);
 
 
     // init particle system

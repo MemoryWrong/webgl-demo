@@ -51,6 +51,7 @@
     "json-loader": "^0.5.7",
     "node-sass": "^4.8.2",
     "sass-loader": "^6.0.7",
+    "string-width": "^2.1.1",
     "style-loader": "^0.18.2",
     "three": "^0.91.0",
     "three-obj": "^0.6.5",

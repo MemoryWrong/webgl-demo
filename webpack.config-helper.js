@@ -99,7 +99,9 @@ module.exports = (options) => {
     });
 
     webpackConfig.devServer = {
-      contentBase: dest,
+      // contentBase: dest,
+      contentBase: 'dest',
+      
       hot: true,
       port: options.port,
       inline: true
