@@ -1,7 +1,14 @@
-# WebGL Demo
+# WebGL Particle Demo
 
 This project is webgl demo contains a lot of WebGL features like particle system, terrain and etc. And this project is using the [es6-starter-kit](https://github.com/wbkd/yet-another-webpack-es6-starterkit) as the es6-starter. 
 
+
+### Content
+
+```
+1. webgl THREE.js terrian features 
+2. particle system demo (need to modify the code)
+```
 
 ### Installation
 
