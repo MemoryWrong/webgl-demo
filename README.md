@@ -4,12 +4,13 @@ This project is webgl demo contains a lot of WebGL features like particle system
 
 
 ### Content
+![alt text](https://github.com/MemoryWrong/webgl-demo/blob/master/src/assets/demo.png)
 
 ```
 1. webgl THREE.js terrian features 
 2. particle system demo (need to modify the code)
 
-![alt text](https://github.com/MemoryWrong/webgl-demo/blob/master/src/assets/demo.png)
+
 ```
 
 ### Installation
